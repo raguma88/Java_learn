@@ -7,9 +7,9 @@ public class ContactDelitionTests extends TestBase {
 
     @Test
     public void testContactDelition() {
-        app.selectContact();
-        app.deleteContact();
-        app.closeModalWindow();
+        app.getContactHelper().selectContact();
+        app.getContactHelper().deleteContact();
+        app.getContactHelper().closeModalWindow();
     }
 
 }
