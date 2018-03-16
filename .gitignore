@@ -18,3 +18,10 @@ Sandbox/src/main/java/MyFirstProgram.java
 Sandbox/out/production/classes/MyFirstProgram.class
 Sandbox/out/production/classes/ru/stqa/pft/sandbox/MyFirstProgram.class
 Sandbox/out/production/classes/MyFirstProgram.class
+Sandbox/out/production/classes/my/homeworks/Distance.class
+Sandbox/out/production/classes/my/homeworks/Point.class
+Sandbox/out/production/classes/ru/stqa/pft/sandbox/Rectangle.class
+*.class
+*.class
+addressbook-web-tests/out/test/classes/ru/stqa/pft/addressbook/GroupCreationTests.class
+addressbook-web-tests/out/test/classes/ru/stqa/pft/addressbook/GroupCreationTests.class
