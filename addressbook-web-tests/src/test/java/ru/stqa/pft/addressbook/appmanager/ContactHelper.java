@@ -2,12 +2,13 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import my.homework.model.ContactData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ContactHelper extends HelperBase {
   /*private FirefoxDriver wd;*/
 
-  public ContactHelper(FirefoxDriver wd) {
+  public ContactHelper(WebDriver wd) {
     super(wd);
   }
 
