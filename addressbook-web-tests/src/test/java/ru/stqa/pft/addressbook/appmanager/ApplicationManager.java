@@ -25,7 +25,6 @@ public class ApplicationManager {
     this.browser = browser;
   }
 
-
   public void init() {
     if (Objects.equals(browser, BrowserType.FIREFOX)) {
       wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
@@ -44,7 +43,7 @@ public class ApplicationManager {
     sessionHelper.login("admin", "secret");
   }
 
-    public void stop() {
+  public void stop() {
     wd.quit();
   }
 
