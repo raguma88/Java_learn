@@ -15,7 +15,6 @@ public class ApplicationManager {
 
   WebDriver wd;
 
-  private NavigationHelper returntoHomeHelper;
   private ContactHelper contactHelper;
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
