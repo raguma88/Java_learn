@@ -15,7 +15,7 @@ public class ApplicationManager {
 
   WebDriver wd;
 
-  private ReturntoHomeHelper returntoHomeHelper;
+  private NavigationHelper returntoHomeHelper;
   private ContactHelper contactHelper;
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
@@ -41,7 +41,6 @@ public class ApplicationManager {
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
     contactHelper = new ContactHelper(wd);
-    returntoHomeHelper = new ReturntoHomeHelper(wd);
     sessionHelper.login("admin", "secret");
   }
 
@@ -61,7 +60,4 @@ public class ApplicationManager {
     return contactHelper;
   }
 
-  public ReturntoHomeHelper getReturntoHomeHelper() {
-    return returntoHomeHelper;
-  }
 }

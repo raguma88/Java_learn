@@ -35,6 +35,10 @@ public class ContactHelper extends HelperBase {
     click(By.name("submit"));
   }
 
+  public void returnToHomePage() {
+    click(By.linkText("home page"));
+  }
+
   public void closeModalWindow() {
     wd.switchTo().alert().accept();
   }
