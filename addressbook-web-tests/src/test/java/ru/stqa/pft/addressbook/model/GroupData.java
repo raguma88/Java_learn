@@ -1,13 +1,12 @@
 package ru.stqa.pft.addressbook.model;
 
 public class GroupData {
-  private int id;
   private final String name;
   private final String header;
   private final String footer;
 
-
   public GroupData(String name, String header, String footer) {
+<<<<<<< HEAD
     this.id = 0;
     this.name = name;
     this.header = header;
@@ -16,17 +15,11 @@ public class GroupData {
 
   public GroupData(int id, String name, String header, String footer) {
     this.id = id;
+=======
+>>>>>>> parent of d64fe2a... Лекции 4.6 - 4.10 для групп
     this.name = name;
     this.header = header;
     this.footer = footer;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public String getName() {
@@ -40,6 +33,7 @@ public class GroupData {
   public String getFooter() {
     return footer;
   }
+<<<<<<< HEAD
 
   @Override
   public String toString() {
@@ -67,6 +61,6 @@ public class GroupData {
     return result;
   }
 
+=======
+>>>>>>> parent of d64fe2a... Лекции 4.6 - 4.10 для групп
 }
-
-
