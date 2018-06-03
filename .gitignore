@@ -25,3 +25,12 @@ Sandbox/out/production/classes/ru/stqa/pft/sandbox/Rectangle.class
 *.class
 addressbook-web-tests/out/test/classes/ru/stqa/pft/addressbook/GroupCreationTests.class
 addressbook-web-tests/out/test/classes/ru/stqa/pft/addressbook/GroupCreationTests.class
+rmis/src/test/java/monitoring/monitoringPacientov/SearchGender.java
+rmis/gradlew.bat
+rmis/gradlew
+rmis/gradle/wrapper/gradle-wrapper.properties
+rmis/gradle/wrapper/gradle-wrapper.jar
+rmis/build.gradle
+.idea/modules/rmis_test.iml
+.idea/modules/rmis_main.iml
+.idea/modules/rmis.iml
