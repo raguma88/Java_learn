@@ -3,13 +3,13 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -64,12 +64,14 @@ public class ContactData {
 
   transient private String allEmails;
 
-  @Expose
-  transient private String group;
-
   @Column(name = "photo")
   @Type(type = "text")
   private String photo = "src/test/resources/test.jpg";
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
 
   public int getId() {
@@ -77,11 +79,6 @@ public class ContactData {
   }
 
   public File getPhoto() { return new File(photo); }
-
-  public ContactData withPhoto(File photo) {
-    this.photo = photo.getPath();
-    return this;
-  }
 
   public String getName() {
     return name;
@@ -117,8 +114,8 @@ public class ContactData {
 
   public String getAllEmails() { return allEmails; }
 
-  public String getGroup() {
-    return group;
+  public Groups getGroups() {
+    return new Groups(groups);
   }
 
   public ContactData withId(int id) {
@@ -181,16 +178,14 @@ public class ContactData {
     return this;
   }
 
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", lastname='" + lastname + '\'' +
-            ", address='" + address + '\'' +
-            ", mobile='" + mobile + '\'' +
-            ", email='" + email + '\'' +
-            '}';
+  public ContactData withPhoto(File photo) {
+    this.photo = photo.getPath();
+    return this;
+  }
+
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
   }
 
   @Override
@@ -205,7 +200,8 @@ public class ContactData {
     if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
     if (address != null ? !address.equals(that.address) : that.address != null) return false;
     if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
-    return email != null ? email.equals(that.email) : that.email == null;
+    if (email != null ? !email.equals(that.email) : that.email != null) return false;
+    return groups != null ? groups.equals(that.groups) : that.groups == null;
   }
 
   @Override
@@ -216,13 +212,20 @@ public class ContactData {
     result = 31 * result + (address != null ? address.hashCode() : 0);
     result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
     result = 31 * result + (email != null ? email.hashCode() : 0);
+    result = 31 * result + (groups != null ? groups.hashCode() : 0);
     return result;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
-
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", address='" + address + '\'' +
+            ", mobile='" + mobile + '\'' +
+            ", email='" + email + '\'' +
+            ", groups=" + groups +
+            '}';
   }
-
 }

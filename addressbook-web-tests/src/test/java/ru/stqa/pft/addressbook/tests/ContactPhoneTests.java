@@ -20,7 +20,7 @@ public class ContactPhoneTests extends TestBase {
       app.contact().create(new ContactData().withName("Gulnara").withLastname("Zakirova")
               .withAddress("RF, RT, Kazan").withHomePhone("+7(111)").withMobilePhone("22-22").withWorkPhone("3 33")
               .withEmail("1@test.ru").withEmail2("2@test.com").withEmail3("3@test.corp")
-              .withGroup("test1"),true);
+              /*.withGroup("test1")*/,true);
     }
   }
 
