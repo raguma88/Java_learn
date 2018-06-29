@@ -200,8 +200,7 @@ public class ContactData {
     if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
     if (address != null ? !address.equals(that.address) : that.address != null) return false;
     if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
-    if (email != null ? !email.equals(that.email) : that.email != null) return false;
-    return groups != null ? groups.equals(that.groups) : that.groups == null;
+    return email != null ? email.equals(that.email) : that.email == null;
   }
 
   @Override
@@ -212,7 +211,6 @@ public class ContactData {
     result = 31 * result + (address != null ? address.hashCode() : 0);
     result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
     result = 31 * result + (email != null ? email.hashCode() : 0);
-    result = 31 * result + (groups != null ? groups.hashCode() : 0);
     return result;
   }
 
@@ -225,7 +223,6 @@ public class ContactData {
             ", address='" + address + '\'' +
             ", mobile='" + mobile + '\'' +
             ", email='" + email + '\'' +
-            ", groups=" + groups +
             '}';
   }
 }

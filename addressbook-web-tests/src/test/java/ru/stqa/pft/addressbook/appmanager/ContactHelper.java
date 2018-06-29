@@ -8,6 +8,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -68,9 +69,13 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
   }
 
-
   public void submitContactModification() {
     click(By.name("update"));
+  }
+
+  private void addgroup() {
+    //wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
+    wd.findElement(By.name("add")).click();
   }
 
   public void create(ContactData contact, boolean creation) {
@@ -141,5 +146,62 @@ public class ContactHelper extends HelperBase {
     return new ContactData().withId(contact.getId()).withName(firstname).withLastname(lastname)
             .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withAddress(address)
             .withEmail(email).withEmail2(email2).withEmail3(email3);
+  }
+
+  public void addContactInGroup(ContactData contactInGroup) {
+    selectContactById(contactInGroup.getId());
+    addgroup();
+  }
+
+  public ContactData searchContactForGroup(Contacts contacts, Groups groups) {
+    for (ContactData contact : contacts) {
+      if (contact.getGroups().size() < groups.size())
+        return contact;
+    }
+    return null;
+  }
+
+  public GroupData groupForContact(ContactData contact, Groups groups) {
+    for (GroupData g : groups) {
+      if (!contact.getGroups().contains(g)) {
+        return g;
+      }
+    }
+    return null;
+  }
+
+  public void deleteContactFromGroup(ContactData contact, GroupData group) {
+    selectFilterByGroup(group);
+    selectContactById(contact.getId());
+    deleteFromGroup(group);
+
+  }
+
+  private void deleteFromGroup(GroupData group) {
+    Assert.assertEquals(wd.findElement(By.name("remove")).getAttribute("value"), "Remove from \"" + group.getName() + "\"");
+    wd.findElement(By.name("remove")).click();
+  }
+
+  private void selectFilterByGroup(GroupData group) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getName());
+  }
+
+  public GroupData groupForContactDeletion(Contacts contacts, Groups groups) {
+    for (GroupData g : groups) {
+      for (ContactData c : contacts) {
+        if (c.getGroups().contains(g)) {
+          return g;
+        }
+      }
+    }
+    return null;
+  }
+
+  public ContactData contactForDeletion(Contacts contacts, GroupData group) {
+    for (ContactData c : contacts) {
+      if (c.getGroups().contains(group))
+        return c;
+    }
+    return null;
   }
 }
