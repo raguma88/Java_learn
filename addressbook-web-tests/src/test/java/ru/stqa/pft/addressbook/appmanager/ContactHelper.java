@@ -148,8 +148,8 @@ public class ContactHelper extends HelperBase {
             .withEmail(email).withEmail2(email2).withEmail3(email3);
   }
 
-  public void addContactInGroup(ContactData contactInGroup) {
-    selectContactById(contactInGroup.getId());
+  public void addContactInGroup(ContactData editedContact) {
+    selectContactById(editedContact.getId());
     addgroup();
   }
 
@@ -186,7 +186,7 @@ public class ContactHelper extends HelperBase {
     new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getName());
   }
 
-  public GroupData groupForContactDeletion(Contacts contacts, Groups groups) {
+  public GroupData groupWithContact(Contacts contacts, Groups groups) {
     for (GroupData g : groups) {
       for (ContactData c : contacts) {
         if (c.getGroups().contains(g)) {
@@ -197,7 +197,7 @@ public class ContactHelper extends HelperBase {
     return null;
   }
 
-  public ContactData contactForDeletion(Contacts contacts, GroupData group) {
+  public ContactData contactInGroup(Contacts contacts, GroupData group) {
     for (ContactData c : contacts) {
       if (c.getGroups().contains(group))
         return c;

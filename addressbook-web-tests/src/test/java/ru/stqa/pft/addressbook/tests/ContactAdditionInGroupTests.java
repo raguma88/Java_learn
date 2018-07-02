@@ -19,7 +19,7 @@ public class ContactAdditionInGroupTests extends TestBase {
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("test1"));
     }
-    app.goTo().homePage();
+    //app.goTo().homePage();
     if (app.db().contacts().size() == 0) {  //если кол-во контактов в БД = 0
       app.goTo().homePage();
       app.contact().create(new ContactData().withName("Gulnara").withLastname("Rafikova")
@@ -31,12 +31,12 @@ public class ContactAdditionInGroupTests extends TestBase {
   public void testContactAdditionInGroup() {
     Contacts contacts = app.db().contacts();
     Groups groups = app.db().groups();
-    ContactData contactInGroup = app.contact().searchContactForGroup(contacts, groups);
-    GroupData group = app.contact().groupForContact(contactInGroup, groups);
-    ContactData before = app.db().contact(contactInGroup.getId());
+    ContactData editedContact = app.contact().searchContactForGroup(contacts, groups); //получаем любой контакт, который не входит хотя бы в одну грппу
+    GroupData group = app.contact().groupForContact(editedContact, groups); //получаем любую группу, в которую не входит указанный контакт
+    ContactData before = app.db().contact(editedContact.getId());
     app.goTo().homePage();
-    app.contact().addContactInGroup(contactInGroup);
-    ContactData after = app.db().contact(contactInGroup.getId());
+    app.contact().addContactInGroup(editedContact);
+    ContactData after = app.db().contact(editedContact.getId());
     assertThat(before.getGroups(), equalTo(after.getGroups().without(group)));
 
   }

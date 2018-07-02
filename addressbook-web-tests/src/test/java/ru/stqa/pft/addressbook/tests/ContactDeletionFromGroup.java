@@ -14,7 +14,6 @@ public class ContactDeletionFromGroup extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-
     if (app.db().groups().size() == 0) {   //если кол-во групп в БД = 0
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("test1"));
@@ -30,12 +29,12 @@ public class ContactDeletionFromGroup extends TestBase {
   }
 
 
-    @Test
+      @Test
   public void testContactDeletionFromGroup() {
     Contacts contacts = app.db().contacts();
     Groups groups = app.db().groups();
-    GroupData group = app.contact().groupForContactDeletion(contacts, groups);
-    ContactData contact = app.contact().contactForDeletion(contacts, group);
+    GroupData group = app.contact().groupWithContact(contacts, groups); //получаем любую группу, в которой есть контакт
+    ContactData contact = app.contact().contactInGroup(contacts, group);  //получаем любой контакт, который входит в группу
     ContactData before = app.db().contact(contact.getId());
     app.goTo().homePage();
     app.contact().deleteContactFromGroup(contact, group);
